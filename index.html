@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Number Loader</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron :wght@500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+    }
+
+    .loader-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      height: 100vh;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .number-display {
+      font-size: 10rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff4e50, #f9d423);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+      will-change: transform, opacity;
+    }
+
+    .loading-text {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      opacity: 0.7;
+      margin-top: 20px;
+      animation: fadeIn 2s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0.6; }
+      to { opacity: 1; }
+    }
+
+    .dots {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(to bottom, #f9d423, #ff4e50);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    .dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(1);
+      }
+    }
+
+    /* Content after loading */
+    .content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0c0c0c, #1b1b1b);
+      height: 100vh;
+      padding: 20px;
+      color: white;
+    }
+
+    .content h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .content button {
+      padding: 14px 36px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      color: #111;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      box-shadow: 0 6px 25px rgba(255, 78, 80, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .content button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 30px rgba(255, 78, 80, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div id="loader" class="loader-container">
+    <div class="number-display" id="number">0</div>
+    <p class="loading-text">Loading your experience...</p>
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <div id="content" class="content">
+    <h1>Welcome to the Experience!</h1>
+    <p>Your journey is ready to begin. We're excited to show you what's next.</p>
+    <button onclick="alert('Let the journey begin!')">Get Started</button>
+  </div>
+
+  <script>
+    const numberDisplay = document.getElementById('number');
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+
+    let currentNumber = 0;
+    const targetNumber = 100;
+
+    // Animate number increment
+    const interval = setInterval(() => {
+      if (currentNumber >= targetNumber) {
+        clearInterval(interval);
+
+        // Hide loader
+        loader.style.opacity = 0;
+        setTimeout(() => {
+          loader.style.display = 'none';
+          content.style.display = 'flex';
+        }, 500);
+      } else {
+        currentNumber++;
+        numberDisplay.textContent = currentNumber;
+
+        // Add subtle animation
+        numberDisplay.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          numberDisplay.style.transform = 'scale(1)';
+        }, 50);
+      }
+    }, 30); // Speed of increment
+  </script>
+</body>
+</html>
