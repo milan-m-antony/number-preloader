@@ -10,6 +10,10 @@ This project contains a simple number preloader implemented in an HTML file (`in
 
 Open the `index.html` file in a web browser to see the number preloader in action.
 
+## preview
+
+open  https://milan-m-antony.github.io/number-preloader/
+
 ## License
 
 This project is open for use and modification. You can add a license if desired.
